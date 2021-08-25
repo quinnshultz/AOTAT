@@ -29,12 +29,11 @@ int main(void)
 	buff = (char *) malloc(sizeof(char)*BUFSIZE);
 
 	// Print welcome message
-	printf("\n\n\tWelcome to: Attack of the Alien Toilets!\n\n");
-	printf("\tChoose your weapon:\n");
+	printf("Welcome to: Attack of the Alien Toilets!\n");
+	printf("It's very dark in here.\n");
 
 	while (get_input() && parse_and_execute());
 
-	printf("Goodbye!\n");
 	exit_aotat();
 }
 
@@ -83,6 +82,10 @@ static int parse_and_execute()
 		{
 			printf("It's too dark to see.\n");
 		}
+		else if (strcmp(verb, "go") == 0)
+		{
+			printf("It's too dark to go anywhere.\n");
+		}
 		else
 		{
 			printf("I don't know how to '%s'.\n", verb);
@@ -104,6 +107,9 @@ static int parse_and_execute()
 // 	Frees any remaining data structures and closes the game.
 //-----------------------------------------------------------------------------
 void exit_aotat(void) {
-	free(buff);			// Deallocate memory for buffer
+	// Deallocate memory for buffer
+	free(buff);
+	
+	printf("Goodbye!\n");
 	exit(0);
 }
