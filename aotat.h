@@ -20,4 +20,6 @@ char *buff;
 void exit_aotat(void);
 static int parse_and_execute(void);
 static int get_input(void);
+extern void execute_go(const char *noun);
+extern void execute_look(const char  *noun);
 #endif

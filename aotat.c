@@ -70,7 +70,7 @@ static int get_input()
 static int parse_and_execute()
 {
 	char *verb = strtok(buff, " \n");
-	char *noun = strtok(buff, " \n");
+	char *noun = strtok(NULL, " \n");
 
 	if (verb != NULL)
 	{
@@ -80,11 +80,11 @@ static int parse_and_execute()
 		}
 		else if (strcmp(verb, "look") == 0)
 		{
-			printf("It's too dark to see.\n");
+			execute_look(noun);
 		}
 		else if (strcmp(verb, "go") == 0)
 		{
-			printf("It's too dark to go anywhere.\n");
+			execute_go(noun);
 		}
 		else
 		{
