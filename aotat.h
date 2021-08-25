@@ -18,5 +18,6 @@ char *buff;
 
 /* Function prototypes */
 void exit_aotat(void);
-
+static int parse_and_execute(void);
+static int get_input(void);
 #endif

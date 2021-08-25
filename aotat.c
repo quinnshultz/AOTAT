@@ -32,16 +32,63 @@ int main(void)
 	printf("\n\n\tWelcome to: Attack of the Alien Toilets!\n\n");
 	printf("\tChoose your weapon:\n");
 
-	// Allow user input until end of buffer
-	while (fgets(buff, BUFSIZE, stdin) != NULL) {
-		// Replace newline with NUL
-		buff[strlen(buff) -1] = '\0';
+	while (get_input() && parse_and_execute());
 
-		// User typed the exit command
-		if (buff == "exit") {
+	printf("Goodbye!\n");
+	exit_aotat();
+}
+
+//-----------------------------------------------------------------------------
+// NAME
+//      get_input
+//
+// SYNOPSIS
+//      #include "aotat.h"
+//
+//      int get_input();
+//
+// DESCRIPTION
+//      
+//-----------------------------------------------------------------------------
+static int get_input()
+{
+	printf("\n--> ");
+	return fgets(buff, BUFSIZE, stdin) != NULL;
+}
+
+//-----------------------------------------------------------------------------
+// NAME
+//      parse_and_execute
+//
+// SYNOPSIS
+//      #include "aotat.h"
+//
+//      int parse_and_execute();
+//
+// DESCRIPTION
+//      
+//-----------------------------------------------------------------------------
+static int parse_and_execute()
+{
+	char *verb = strtok(buff, " \n");
+	char *noun = strtok(buff, " \n");
+
+	if (verb != NULL)
+	{
+		if (strcmp(verb, "quit") == 0)
+		{
 			exit_aotat();
 		}
+		else if (strcmp(verb, "look") == 0)
+		{
+			printf("It's too dark to see.\n");
+		}
+		else
+		{
+			printf("I don't know how to '%s'.\n", verb);
+		}
 	}
+	return 1;
 }
 
 //-----------------------------------------------------------------------------

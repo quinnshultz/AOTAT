@@ -10,4 +10,4 @@ aotat.o:
 	$(CC) $(CLAGS) -c aotat.c
 
 clean:
-	rm -f ultraposh *.a *.o
+	rm -f aotat *.a *.o
