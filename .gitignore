@@ -6,3 +6,6 @@ aotat
 
 # C Libraries
 *.a
+
+# IDE Files
+.vs
