@@ -1,5 +1,5 @@
 /*
- * Attack of the Alien Toilets - A really fucked up game
+ * Attack of the Alien Toilets - A space adventure!
  *
  * Author: Quinn Shultz
  * Contents: Main function and user input processing functions
@@ -8,34 +8,10 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include "aotat.h"
+#include "location.h"
 
-//-----------------------------------------------------------------------------
-// NAME
-//	main, main function, aotat
-//
-// SYNOPSIS
-//	#include "aotat.h"
-//
-//	int main();
-//
-// DESCRIPTION
-// 	Gets user input, prints some arbitrary text
-//-----------------------------------------------------------------------------
-int main(void) 
-{
-	// Allocate memory for user-input buffer
-	buff = (char *) malloc(sizeof(char)*BUFSIZE);
-
-	// Print welcome message
-	printf("Welcome to: Attack of the Alien Toilets!\n");
-	printf("It's very dark in here.\n");
-
-	while (get_input() && parse_and_execute());
-
-	exit_aotat();
-}
+// User-input buffer
+static char buff[100];
 
 //-----------------------------------------------------------------------------
 // NAME
@@ -47,12 +23,12 @@ int main(void)
 //      int get_input();
 //
 // DESCRIPTION
-//      
+//
 //-----------------------------------------------------------------------------
 static int get_input()
 {
 	printf("\n--> ");
-	return fgets(buff, BUFSIZE, stdin) != NULL;
+	return fgets(buff, sizeof(buff), stdin) != NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -65,7 +41,7 @@ static int get_input()
 //      int parse_and_execute();
 //
 // DESCRIPTION
-//      
+//
 //-----------------------------------------------------------------------------
 static int parse_and_execute()
 {
@@ -76,7 +52,8 @@ static int parse_and_execute()
 	{
 		if (strcmp(verb, "quit") == 0)
 		{
-			exit_aotat();
+			printf("Goodbye!\n");
+			return 0;
 		}
 		else if (strcmp(verb, "look") == 0)
 		{
@@ -96,20 +73,24 @@ static int parse_and_execute()
 
 //-----------------------------------------------------------------------------
 // NAME
-//	exit_aotat
+//	main, main function, aotat
 //
 // SYNOPSIS
 //	#include "aotat.h"
 //
-//	void exit_aotat();
+//	int main();
 //
 // DESCRIPTION
-// 	Frees any remaining data structures and closes the game.
+// 	Gets user input, prints some arbitrary text
 //-----------------------------------------------------------------------------
-void exit_aotat(void) {
-	// Deallocate memory for buffer
-	free(buff);
-	
+int main(void)
+{
+	// Print welcome message
+	printf("Welcome to: Attack of the Alien Toilets!\n");
+	execute_look("around");
+
+	while (get_input() && parse_and_execute());
+
 	printf("Goodbye!\n");
-	exit(0);
+	return 0;
 }
